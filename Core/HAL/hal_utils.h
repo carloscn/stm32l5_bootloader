@@ -52,4 +52,13 @@ void hal_sleep_us(size_t us);
  * @param ms The number of milliseconds to sleep.
  */
 
+/**
+ * @brief Milliseconds since boot (SysTick based, wraps after ~49 days).
+ *
+ * Lets modules that must not include the STM32 headers (e.g. the MCP2518FD
+ * driver glue) measure timeouts. Compare with unsigned subtraction:
+ * (hal_get_tick_ms() - start) >= timeout_ms.
+ */
+uint32_t hal_get_tick_ms(void);
+
 #endif // HAL_UTILS_H

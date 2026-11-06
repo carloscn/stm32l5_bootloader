@@ -9,6 +9,11 @@ void hal_delay_us(size_t us)
 
 }
 
+uint32_t hal_get_tick_ms(void)
+{
+    return HAL_GetTick();
+}
+
 // Delay for a specified number of milliseconds (uses HAL_Delay)
 void hal_delay_ms(size_t ms)
 {

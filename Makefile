@@ -61,6 +61,8 @@ STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c \
 STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c \
 STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c \
 STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c \
+STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_spi.c \
+STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_spi_ex.c \
 STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc.c \
 STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc_ex.c \
 STM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c \
@@ -76,7 +78,12 @@ Core/Src/sysmem.c \
 Core/Src/syscalls.c \
 Core/HAL/hal_gpio.c \
 Core/HAL/hal_utils.c \
-Core/HAL/hal_uart.c
+Core/HAL/hal_uart.c \
+Core/HAL/hal_spi.c \
+Core/HAL/hal_can.c \
+Core/Drivers/mcp2518fd/can_mcp2518fd.c \
+Core/Drivers/mcp2518fd/drv_canfdspi_api.c \
+Core/Drivers/mcp2518fd/drv_canfdspi_port.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -169,7 +176,8 @@ C_INCLUDES =  \
 -ISTM32CubeL5/Drivers/STM32L5xx_HAL_Driver/Inc/Legacy \
 -ISTM32CubeL5/Drivers/CMSIS/Include \
 -ISTM32CubeL5/Drivers/CMSIS/Device/ST/STM32L5xx/Include \
--ICore/HAL
+-ICore/HAL \
+-ICore/Drivers/mcp2518fd
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
