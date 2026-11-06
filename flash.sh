@@ -17,9 +17,19 @@ function utils_check_ret()
     fi
 }
 
+# Fall back to st-flash when STM32CubeProgrammer is not installed.
+if [[ "$USE_ST_FLASH" != "1" ]] && ! command -v STM32_Programmer_CLI >/dev/null 2>&1 \
+        && command -v st-flash >/dev/null 2>&1; then
+    USE_ST_FLASH=1
+fi
+
+# No sudo on Windows (Git Bash / MSYS).
+SUDO=sudo
+[[ "$(uname)" == *MINGW* || "$(uname)" == *MSYS* || "$(uname)" == *CYGWIN* ]] && SUDO=
+
 if [[ "$USE_ST_FLASH" == "1" ]]; then
     echo "[INFO] use st-flash"
-    sudo st-flash --reset --connect-under-reset write ${WRITE_FILE} ${NS_FLASH_ADDR} || \
+    ${SUDO} st-flash --reset --connect-under-reset write ${WRITE_FILE} ${NS_FLASH_ADDR} || \
         utils_check_ret $? "flash write ${WRITE_FILE} ${NS_FLASH_ADDR}"
 else
     STM32_Programmer_CLI -c port=SWD -d ${WRITE_FILE} ${NS_FLASH_ADDR} -s || \
